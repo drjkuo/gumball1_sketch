@@ -1,12 +1,17 @@
-int rectX, rectY;      // Position of square button
-int circleX, circleY;  // Position of circle button
-int rectSize = 50;     // Diameter of rect
-int circleSize = 50;   // Diameter of circle
-color rectColor, circleColor, baseColor;
-color rectHighlight, circleHighlight;
+int IQX, IQY;      // Position of square button
+int TCX, TCY;  // Position of circle button
+int IQYSize = 50;     // Diameter of rect
+int IQXSize = 220;
+int TCYSize = 50;   // Diameter of circle
+int TCXSize = 220; 
+color IQColor, TCColor, baseColor;
+color IQHighlight, TCHighlight;
 color currentColor;
-boolean rectOver = false;
-boolean circleOver = false;
+boolean IQOver = false;
+boolean TCOver = false;
+
+GumballMachine gumballMachine = new GumballMachine(5);
+
 
 
 void setup() 
@@ -18,6 +23,7 @@ void setup()
   //strokeCap(ROUND);
   
   //add
+  /*
   rectColor = color(255);
   rectHighlight = color(150);
   circleColor = color(255);
@@ -28,7 +34,18 @@ void setup()
   circleY = 50;//height/2;
   rectX = 25;//width/2-rectSize-10;
   rectY = 100;//height/2-rectSize/2;
+  */
   
+  IQColor = color(255);
+  IQHighlight = color(150);
+  TCColor = color(255);
+  TCHighlight = color(150);
+  baseColor = color(102);
+  currentColor = baseColor;
+  TCX = 0;//width/2+circleSize/2+10;
+  TCY = 50;//height/2;
+  IQX = 0;//width/2-rectSize-10;
+  IQY = 0;//height/2-rectSize/2;
   
   
   // load font
@@ -46,30 +63,47 @@ void draw() {
   update();
   background(currentColor);
   
-  if (rectOver) {
-    fill(rectHighlight);
+  if (IQOver) {
+    fill(IQHighlight);
   } else {
-    fill(rectColor);
+    fill(IQColor);
   }
   //stroke(255);
-  rect(rectX, rectY, rectSize, rectSize);
+  //fill(50);
+  //text("Insert Quarter", IQX, IQY, IQSize, IQSize);
+  rect(IQX, IQY, IQXSize, IQYSize);
+
   
-  if (circleOver) {
-    fill(circleHighlight);
+  if (TCOver) {
+    fill(TCHighlight);
   } else {
-    fill(circleColor);
+    fill(TCColor);
   }
   //stroke(0);
-  ellipse(circleX, circleY, circleSize, circleSize);
-  ellipseMode(CENTER);
+  //fill(50);
+  //text("Turn Crank",TCX, TCY, TCSize, TCSize);
+  rect(TCX, TCY, TCXSize, TCYSize);
+  //ellipseMode(CENTER);
   
-  /*
+  
+  //textSize(16);
+  fill(220,20,60);
+  text("Insert Quarter", 0+10, 0+35);
+  
+  //textSize(16);
+  fill(220,20,60);
+  text("Turn Crank", 0+10, 50+35);
+  
+  
   fill(0);  
   text("The Gumball Machine", 250, 60);
   PImage image = loadImage("gumball.jpg");
   image(image, (width-image.width)/2, (height-image.height)/2);  
-  runTest() ;
-  */
+  //runTest() ;
+  
+  //String s = gumballMachine.toString();
+  //text(s,25,530);
+  
 }
 
 
@@ -89,27 +123,43 @@ public void runTest() {
 
 //void update(int X, int Y) {
 void update() {
-  if ( overCircle(circleX, circleY, circleSize) ) {
-    circleOver = true;
-    rectOver = false;
-  } else if ( overRect(rectX, rectY, rectSize, rectSize) ) {
-    rectOver = true;
-    circleOver = false;
+  if ( overRect(TCX, TCY, TCXSize, TCYSize) ) {
+    TCOver = true;
+    IQOver = false;
+    
+  } else if ( overRect(IQX, IQY, IQXSize, IQYSize) ) {
+    IQOver = true;
+    TCOver = false;
+    
   } else {
-    circleOver = rectOver = false;
+    TCOver = IQOver = false;
   }
 }
 
 void mousePressed() {
-  if (circleOver) {
-    //currentColor = circleColor;
-    circleColor = color(0);
+  if (TCOver) {
+    //currentColor = TCColor;
+    TCColor = color(0);
+    gumballMachine.turnCrank();
   }
-  if (rectOver) {
+  if (IQOver) {
     //currentColor = rectColor;
-    rectColor = color(0);
+    IQColor = color(0);
+    gumballMachine.insertQuarter();
   }
 }
+
+/*
+boolean overText(int x, int y, int width, int height)  {
+  if (mouseX >= x && mouseX <= x+width && 
+      mouseY >= y && mouseY <= y+height) {
+    return true;
+  } else {
+    return false;
+  }
+}
+*/
+
 
 boolean overRect(int x, int y, int width, int height)  {
   if (mouseX >= x && mouseX <= x+width && 
@@ -120,6 +170,7 @@ boolean overRect(int x, int y, int width, int height)  {
   }
 }
 
+/*
 boolean overCircle(int x, int y, int diameter) {
   float disX = x - mouseX;
   float disY = y - mouseY;
@@ -128,4 +179,5 @@ boolean overCircle(int x, int y, int diameter) {
   } else {
     return false;
   }
-}
+  
+} */
