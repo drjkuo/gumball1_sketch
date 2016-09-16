@@ -101,8 +101,8 @@ void draw() {
   image(image, (width-image.width)/2, (height-image.height)/2);  
   //runTest() ;
   
-  //String s = gumballMachine.toString();
-  //text(s,25,530);
+  String s = gumballMachine.toString();
+  text(s,25,530);
   
 }
 
