@@ -141,11 +141,13 @@ void mousePressed() {
     //currentColor = TCColor;
     TCColor = color(0);
     gumballMachine.turnCrank();
+    IQColor = color(255);
   }
   if (IQOver) {
     //currentColor = rectColor;
     IQColor = color(0);
     gumballMachine.insertQuarter();
+    TCColor = color(255);
   }
 }
 
