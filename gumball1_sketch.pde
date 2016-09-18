@@ -6,6 +6,15 @@ public class Button {
  public color ocolor;
  public color hcolor;
  Button () {}
+ Button (int x, int y, int xsize, int ysize, color ocolor, color hcolor) 
+ {
+   this.x=x;
+   this.y=y;
+   this.xsize=xsize;
+   this.ysize=ysize;
+   this.ocolor=ocolor;
+   this.hcolor=hcolor;
+ }
  
 }
 
@@ -15,7 +24,7 @@ color currentColor;
 boolean IQOver = false;
 boolean TCOver = false;
 Button BI = new Button();
-Button BT = new Button();
+Button BT = new Button(0,50,220,50,255,150);
 
 void setup() 
 {
@@ -27,16 +36,16 @@ void setup()
 
   BI.ysize = 50;     // Diameter of rect
   BI.xsize = 220;
-  BT.ysize = 50;   // Diameter of circle
-  BT.xsize = 220; 
+  //BT.ysize = 50;   // Diameter of circle
+  //BT.xsize = 220; 
   BI.ocolor = color(255);
   BI.hcolor = color(150);
-  BT.ocolor = color(255);
-  BT.hcolor = color(150);
+  //BT.ocolor = color(255);
+  //BT.hcolor = color(150);
   baseColor = color(102);
   currentColor = baseColor;
-  BT.x = 0;//width/2+circleSize/2+10;
-  BT.y = 50;//height/2;
+  //BT.x = 0;//width/2+circleSize/2+10;
+  //BT.y = 50;//height/2;
   BI.x = 0;//width/2-rectSize-10;
   BI.y = 0;//height/2-rectSize/2;
   
