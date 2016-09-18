@@ -1,16 +1,3 @@
-/*
-int IQX, IQY;      // Position of square button
-int TCX, TCY;  // Position of circle button
-int IQYSize = 50;     // Diameter of rect
-int IQXSize = 220;
-int TCYSize = 50;   // Diameter of circle
-int TCXSize = 220; 
-color IQColor, TCColor, baseColor;
-color IQHighlight, TCHighlight;
-color currentColor;
-boolean IQOver = false;
-boolean TCOver = false;
-*/
 public class Button {
  public int x;
  public int y;
@@ -64,8 +51,6 @@ void setup()
 }
 
 void draw() {
-  //add
-  //update(mouseX, mouseY);
   update();
   background(currentColor);
   
@@ -74,24 +59,15 @@ void draw() {
   } else {
     fill(BI.ocolor);
   }
-  //stroke(255);
-  //fill(50);
-  //text("Insert Quarter", IQX, IQY, IQSize, IQSize);
   rect(BI.x, BI.y, BI.xsize, BI.ysize);
-
   
   if (TCOver) {
     fill(BT.hcolor);
   } else {
     fill(BT.ocolor);
   }
-  //stroke(0);
-  //fill(50);
-  //text("Turn Crank",TCX, TCY, TCSize, TCSize);
   rect(BT.x, BT.y, BT.xsize, BT.ysize);
-  //ellipseMode(CENTER);
-  
-  
+
   //textSize(16);
   fill(220,20,60);
   text("Insert Quarter", 0+10, 0+35);
@@ -107,7 +83,7 @@ void draw() {
   image(image, (width-image.width)/2, (height-image.height)/2);  
   //runTest() ;
   
-  String s = gumballMachine.toString();
+  String s = gumballMachine.toString(); //text to show inventory
   text(s,25,530);
   
 }
@@ -157,16 +133,6 @@ void mousePressed() {
   }
 }
 
-/*
-boolean overText(int x, int y, int width, int height)  {
-  if (mouseX >= x && mouseX <= x+width && 
-      mouseY >= y && mouseY <= y+height) {
-    return true;
-  } else {
-    return false;
-  }
-}
-*/
 
 
 boolean overRect(int x, int y, int width, int height)  {
@@ -177,15 +143,3 @@ boolean overRect(int x, int y, int width, int height)  {
     return false;
   }
 }
-
-/*
-boolean overCircle(int x, int y, int diameter) {
-  float disX = x - mouseX;
-  float disY = y - mouseY;
-  if (sqrt(sq(disX) + sq(disY)) < diameter/2 ) {
-    return true;
-  } else {
-    return false;
-  }
-  
-} */
