@@ -1,5 +1,5 @@
 public class Button {
- public int x;
+ public int x; 
  public int y;
  public int xsize;
  public int ysize; 
@@ -8,11 +8,7 @@ public class Button {
  Button () {}
  Button (int x, int y, int xsize, int ysize, color ocolor, color hcolor) 
  {
-   this.x=x;
-   this.y=y;
-   this.xsize=xsize;
-   this.ysize=ysize;
-   this.ocolor=ocolor;
+   this.x=x; this.y=y;    this.xsize=xsize;    this.ysize=ysize;    this.ocolor=ocolor;
    this.hcolor=hcolor;
  }
  
@@ -117,11 +113,9 @@ void update() {
   if ( overRect(BT.x, BT.y, BT.xsize, BT.ysize) ) {
     TCOver = true;
     IQOver = false;
-    
   } else if ( overRect(BI.x, BI.y, BI.xsize, BI.ysize) ) {
     IQOver = true;
-    TCOver = false;
-    
+    TCOver = false;  
   } else {
     TCOver = IQOver = false;
   }
