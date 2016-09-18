@@ -1,3 +1,4 @@
+/*
 int IQX, IQY;      // Position of square button
 int TCX, TCY;  // Position of circle button
 int IQYSize = 50;     // Diameter of rect
@@ -9,10 +10,25 @@ color IQHighlight, TCHighlight;
 color currentColor;
 boolean IQOver = false;
 boolean TCOver = false;
+*/
+public class Button {
+ public int x;
+ public int y;
+ public int xsize;
+ public int ysize; 
+ public color ocolor;
+ public color hcolor;
+ Button () {}
+ 
+}
 
 GumballMachine gumballMachine = new GumballMachine(5);
-
-
+color baseColor;
+color currentColor;
+boolean IQOver = false;
+boolean TCOver = false;
+Button BI = new Button();
+Button BT = new Button();
 
 void setup() 
 {
@@ -21,31 +37,21 @@ void setup()
   smooth() ;
   //strokeWeight(3);
   //strokeCap(ROUND);
-  
-  //add
-  /*
-  rectColor = color(255);
-  rectHighlight = color(150);
-  circleColor = color(255);
-  circleHighlight = color(150);
+
+  BI.ysize = 50;     // Diameter of rect
+  BI.xsize = 220;
+  BT.ysize = 50;   // Diameter of circle
+  BT.xsize = 220; 
+  BI.ocolor = color(255);
+  BI.hcolor = color(150);
+  BT.ocolor = color(255);
+  BT.hcolor = color(150);
   baseColor = color(102);
   currentColor = baseColor;
-  circleX = 50;//width/2+circleSize/2+10;
-  circleY = 50;//height/2;
-  rectX = 25;//width/2-rectSize-10;
-  rectY = 100;//height/2-rectSize/2;
-  */
-  
-  IQColor = color(255);
-  IQHighlight = color(150);
-  TCColor = color(255);
-  TCHighlight = color(150);
-  baseColor = color(102);
-  currentColor = baseColor;
-  TCX = 0;//width/2+circleSize/2+10;
-  TCY = 50;//height/2;
-  IQX = 0;//width/2-rectSize-10;
-  IQY = 0;//height/2-rectSize/2;
+  BT.x = 0;//width/2+circleSize/2+10;
+  BT.y = 50;//height/2;
+  BI.x = 0;//width/2-rectSize-10;
+  BI.y = 0;//height/2-rectSize/2;
   
   
   // load font
@@ -64,25 +70,25 @@ void draw() {
   background(currentColor);
   
   if (IQOver) {
-    fill(IQHighlight);
+    fill(BI.hcolor);
   } else {
-    fill(IQColor);
+    fill(BI.ocolor);
   }
   //stroke(255);
   //fill(50);
   //text("Insert Quarter", IQX, IQY, IQSize, IQSize);
-  rect(IQX, IQY, IQXSize, IQYSize);
+  rect(BI.x, BI.y, BI.xsize, BI.ysize);
 
   
   if (TCOver) {
-    fill(TCHighlight);
+    fill(BT.hcolor);
   } else {
-    fill(TCColor);
+    fill(BT.ocolor);
   }
   //stroke(0);
   //fill(50);
   //text("Turn Crank",TCX, TCY, TCSize, TCSize);
-  rect(TCX, TCY, TCXSize, TCYSize);
+  rect(BT.x, BT.y, BT.xsize, BT.ysize);
   //ellipseMode(CENTER);
   
   
@@ -123,11 +129,11 @@ public void runTest() {
 
 //void update(int X, int Y) {
 void update() {
-  if ( overRect(TCX, TCY, TCXSize, TCYSize) ) {
+  if ( overRect(BT.x, BT.y, BT.xsize, BT.ysize) ) {
     TCOver = true;
     IQOver = false;
     
-  } else if ( overRect(IQX, IQY, IQXSize, IQYSize) ) {
+  } else if ( overRect(BI.x, BI.y, BI.xsize, BI.ysize) ) {
     IQOver = true;
     TCOver = false;
     
@@ -139,15 +145,15 @@ void update() {
 void mousePressed() {
   if (TCOver) {
     //currentColor = TCColor;
-    TCColor = color(0);
+    BT.ocolor = color(0);
     gumballMachine.turnCrank();
-    IQColor = color(255);
+    BI.ocolor = color(255);
   }
   if (IQOver) {
     //currentColor = rectColor;
-    IQColor = color(0);
+    BI.ocolor = color(0);
     gumballMachine.insertQuarter();
-    TCColor = color(255);
+    BT.ocolor = color(255);
   }
 }
 
